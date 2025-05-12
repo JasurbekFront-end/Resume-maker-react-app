@@ -14,22 +14,22 @@
     ✅ Backend && AJAX && XHR && Fetch  - 2.5d
     ✅ JS Execution && Event Loop - 1d
 
-# AJAX - Asynchronous JavaScript And XML
+# AJAX - Asynchronous JavaScript And XML 👍
 
         ✅ Simple example AJAX Request 👍
         ✅ JSON - JavaScript object notation 👍
         ✅ XHR - XML Http Request 👍
         ✅ Fetch - Web API fetch 👍
-        ✅ Simple example with fetch
+        ✅ Simple example with fetch 👍
 
-# What is Backend
+# What is Backend 👍
 
-    ✅ https://httpstatusdogs.com/
-    ✅ CRUD - CREATE-READ-UPDATE-DELETE
-    ✅ POST - CREATE
-    ✅ GET - READ
-    ✅ PUT and PATCH - UPDATE
-    ✅ DELETE - DELETE
+    ✅ https://httpstatusdogs.com/ 👍
+    ✅ CRUD - CREATE-READ-UPDATE-DELETE 👍
+    ✅ POST - CREATE 👍
+    ✅ GET - READ 👍
+    ✅ PUT and PATCH - UPDATE 👍
+    ✅ DELETE - DELETE 👍
 
 # Create Todo App Backend and Frontend
 

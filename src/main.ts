@@ -1,4 +1,4 @@
-import { redirectBtn, wrapperElm } from './elements';
+import { wrapperElm } from './elements';
 import { Todo } from './services';
 
 function renderLoading(element: HTMLElement) {
