@@ -1,11 +1,12 @@
 import { Todo } from './services';
 
-Todo.List().then(todos => {
+async function init() {
+  const todos = await Todo.List();
   console.log('todos = ', todos);
 
-  const todo = todos[0];
+  const todoResponse = await Todo.Single(todos[0].id);
+  const todoData = await todoResponse.json();
+  console.log('todo = ', todo);
+}
 
-  Todo.Single(todo.id).then(todo => {
-    console.log('todo = ', todo);
-  });
-});
+init();
