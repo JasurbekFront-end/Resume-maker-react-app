@@ -1,23 +1,17 @@
 import type { Todo } from '../types';
+import { delay } from '../utils';
 
 export async function List() {
   const response = await fetch('https://jsonplaceholder.typicode.com/todos');
-
-  return response.json();
+  const todos: Todo[] = await response.json();
+  await delay(3000);
+  return todos;
 }
 
-export function Single(todoId: number) {
-  return new Promise<Todo>((resolve, reject) => {
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', `https://jsonplaceholder.typicode.com/todos/${todoId}`);
-    xhr.send();
-    xhr.onload = () => {
-      const todo: Todo = JSON.parse(xhr?.responseText);
-      resolve(todo);
-    };
+export async function Single(todoId: number) {
+  const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${todoId}`);
+  const todo: Todo = await response.json();
+  await delay(3000);
 
-    xhr.onerror = () => {
-      reject(new Error('Network Error'));
-    };
-  });
+  return todo;
 }

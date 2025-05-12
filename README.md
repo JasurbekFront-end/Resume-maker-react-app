@@ -18,8 +18,8 @@
 
         ✅ Simple example AJAX Request 👍
         ✅ JSON - JavaScript object notation 👍
-        ✅ XHR - XML Http Request
-        ✅ Fetch - Web API fetch
+        ✅ XHR - XML Http Request 👍
+        ✅ Fetch - Web API fetch 👍
         ✅ Simple example with fetch
 
 # What is Backend
