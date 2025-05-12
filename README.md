@@ -22,6 +22,15 @@
         ✅ Fetch - Web API fetch
         ✅ Simple example with fetch
 
+# What is Backend
+
+    ✅ https://httpstatusdogs.com/
+    ✅ CRUD - CREATE-READ-UPDATE-DELETE
+    ✅ POST - CREATE
+    ✅ GET - READ
+    ✅ PUT and PATCH - UPDATE
+    ✅ DELETE - DELETE
+
 # Create Todo App Backend and Frontend
 
 ✅ ------CREATE------
