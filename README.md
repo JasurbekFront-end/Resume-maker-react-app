@@ -1,47 +1,54 @@
-# ---------- 12.04.25 ---------- (87)
+# React + TypeScript + Vite
 
-# JS Advanced
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-    ✅ Expression vs Statement 👍
-    ✅ OOP(Factory Function 👍, Constructor Function 👍 and Class 👍) - 3d 👍
-    ✅ Prototype && Prototype Chain 👍
-    ✅ Closure - 1d 👍
-    ✅ JS Modules () 👍
-    ✅ NPM Package 👍
-    ✅ Callbacks && Promises && Async/Await - 2d 👍
-    ✅ JSON 👍
-    ✅ Some topics of TYPESCRIPT - 1.5d 👍
-    ✅ Backend && AJAX && XHR && Fetch  - 2.5d
-    ✅ JS Execution && Event Loop - 1d
+Currently, two official plugins are available:
 
-# AJAX - Asynchronous JavaScript And XML 👍
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-        ✅ Simple example AJAX Request 👍
-        ✅ JSON - JavaScript object notation 👍
-        ✅ XHR - XML Http Request 👍
-        ✅ Fetch - Web API fetch 👍
-        ✅ Simple example with fetch 👍
+## Expanding the ESLint configuration
 
-# What is Backend 👍
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-    ✅ https://httpstatusdogs.com/ 👍
-    ✅ CRUD - CREATE-READ-UPDATE-DELETE 👍
-    ✅ POST - CREATE 👍
-    ✅ GET - READ 👍
-    ✅ PUT and PATCH - UPDATE 👍
-    ✅ DELETE - DELETE 👍
+```js
+export default tseslint.config({
+  extends: [
+    // Remove ...tseslint.configs.recommended and replace with this
+    ...tseslint.configs.recommendedTypeChecked,
+    // Alternatively, use this for stricter rules
+    ...tseslint.configs.strictTypeChecked,
+    // Optionally, add this for stylistic rules
+    ...tseslint.configs.stylisticTypeChecked,
+  ],
+  languageOptions: {
+    // other options...
+    parserOptions: {
+      project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      tsconfigRootDir: import.meta.dirname,
+    },
+  },
+})
+```
 
-# Create Todo App Backend and Frontend
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-✅ ------CREATE------
-✅ [POST]["/todos"] -> create todo
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-✅ ------READ------
-✅ [GET]["/todos"] -> get all todos
-✅ [GET]["/todos/:todoId"] -> get single todo
-
-✅ ------UPDATE------
-✅ [PUT | PATCH]["/todos/:todoId"] -> update todo
-
-✅ ------DELETE------
-✅ [DELETE]["/todos/:todoId"] -> delete todo
+export default tseslint.config({
+  plugins: {
+    // Add the react-x and react-dom plugins
+    'react-x': reactX,
+    'react-dom': reactDom,
+  },
+  rules: {
+    // other rules...
+    // Enable its recommended typescript rules
+    ...reactX.configs['recommended-typescript'].rules,
+    ...reactDom.configs.recommended.rules,
+  },
+})
+```
