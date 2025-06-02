@@ -3,7 +3,7 @@ import { useState } from "react";
 interface ExperienceAccordionProps {
   onDelete: () => void;
   data: ExperienceData;
-  onChange: (field: keyof ExperienceData, value: string) => void;
+  onChange: (field: keyof ExperienceData, value: string | boolean) => void;
 }
 interface ExperienceData {
   company: string;
@@ -11,6 +11,7 @@ interface ExperienceData {
   startDate: string;
   endDate: string;
   description: string;
+  isCompleted: boolean;
 }
 export default function ExperienceAccordion({
   data,
@@ -18,7 +19,7 @@ export default function ExperienceAccordion({
   onChange,
 }: ExperienceAccordionProps) {
   const [isOpen, setIsOpen] = useState(true);
- const handleDateInput = (
+  const handleDateInput = (
     e: React.ChangeEvent<HTMLInputElement>,
     field: keyof ExperienceData,
   ) => {
@@ -82,18 +83,34 @@ export default function ExperienceAccordion({
               type="text"
               placeholder="Start Date (MM/YYYY)"
               value={data.startDate || ""}
-              onChange={(e) => handleDateInput(e,"startDate")}
+              onChange={(e) => handleDateInput(e, "startDate")}
               className="w-full border-b border-gray-300 focus:border-blue-500 focus:outline-none"
             />
             <input
               type="text"
               placeholder="End Date (MM/YYYY)"
               value={data.endDate || ""}
-                onChange={(e) => handleDateInput(e,"endDate")}
-              className="w-full border-b border-gray-300 focus:border-blue-500 focus:outline-none"
+              onChange={(e) => handleDateInput(e, "endDate")}
+              disabled={data.isCompleted}
+              className={`w-full border-b border-gray-300 focus:border-blue-500 focus:outline-none ${data.isCompleted ? "cursor-not-allowed opacity-50" : ""}`}
             />
           </div>
-
+          <div className="grid grid-cols-[40%_60%] gap-4">
+            <div />
+            <div className="flex w-full items-center">
+              <div
+                onClick={() => {
+                  onChange("isCompleted", !data.isCompleted);
+                }}
+                className={`size-[15px] rounded-full ${data.isCompleted ? "border-none bg-blue-500 ring-2 ring-blue-300" : "border"} `}
+              />
+              <h1
+                className={`pl-2 ${data.isCompleted ? "text-black" : "text-gray-700"}`}
+              >
+                Not completed
+              </h1>
+            </div>
+          </div>
           <div>
             <h1 className="mt-5 font-[500] text-gray-900">Description</h1>
             <textarea

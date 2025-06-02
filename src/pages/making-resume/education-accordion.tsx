@@ -6,11 +6,12 @@ interface EducationData {
   startDate: string;
   endDate: string;
   description: string;
+  isCompleted: boolean;
 }
 interface EducationProps {
   data: EducationData;
   onDelete: () => void;
-  onChange: (field: keyof EducationData, value: string) => void;
+  onChange: (field: keyof EducationData, value: string | boolean) => void;
 }
 
 export default function EducationAccordion({
@@ -92,12 +93,30 @@ export default function EducationAccordion({
               className="w-full border-b border-gray-300 focus:border-blue-500 focus:outline-none"
             />
             <input
+              inputMode="numeric"
               value={data.endDate}
               type="text"
               placeholder="End Date (MM/YYYY)"
-               onChange={(e) => handleDateInput(e, "endDate")}
-              className="w-full border-b border-gray-300 focus:border-blue-500 focus:outline-none"
+              onChange={(e) => handleDateInput(e, "endDate")}
+              disabled={data.isCompleted}
+              className={`w-full border-b border-gray-300 focus:border-blue-500 focus:outline-none ${data.isCompleted ? "cursor-not-allowed opacity-50" : ""}`}
             />
+          </div>
+          <div className="grid grid-cols-[40%_60%] gap-4">
+            <div />
+            <div className="flex w-full items-center">
+              <div
+                onClick={() => {
+                  onChange("isCompleted", !data.isCompleted);
+                }}
+                className={`size-[15px] rounded-full ${data.isCompleted ? "border-none bg-blue-500 ring-2 ring-blue-300" : "border"} `}
+              />
+              <h1
+                className={`pl-2 ${data.isCompleted ? "text-black" : "text-gray-700"}`}
+              >
+                Not completed
+              </h1>
+            </div>
           </div>
 
           <div>

@@ -4,26 +4,27 @@ import ExperienceAccordion from "./experience-accordion";
 import SkillSection from "./skill-section";
 import SubmitBtn from "../../components/submit-btn";
 import { useNavigate } from "react-router-dom";
-
+export interface ExperienceData {
+  id: number;
+  company: string;
+  role: string;
+  startDate: string;
+  endDate: string;
+  description: string;
+  isCompleted: boolean;
+}
+export interface EducationData {
+  id: number;
+  school: string;
+  field: string;
+  startDate: string;
+  endDate: string;
+  description: string;
+  isCompleted: boolean;
+}
 export default function MakingResume() {
-  interface ExperienceData {
-    id: number;
-    company: string;
-    role: string;
-    startDate: string;
-    endDate: string;
-    description: string;
-  }
-  interface EducationData {
-    id: number;
-    school: string;
-    field: string;
-    startDate: string;
-    endDate: string;
-    description: string;
-  }
   const [avatar, setAvatar] = useState<string>(
-    "/src/assets/upload-picture.png",
+    () => localStorage.getItem("avatar") || "",
   );
   const [educationSections, setEducationSections] = useState<EducationData[]>(
     () => {
@@ -38,6 +39,7 @@ export default function MakingResume() {
               startDate: "",
               endDate: "",
               city: "",
+              isCompleted: false,
             },
           ];
     },
@@ -127,7 +129,9 @@ export default function MakingResume() {
       JSON.stringify(experienceSection),
     );
   }, [experienceSection]);
-
+  useEffect(() => {
+    localStorage.setItem("avatar", avatar);
+  }, [avatar]);
   const navigate = useNavigate();
   function handleResumePreviewPage() {
     if (
@@ -148,6 +152,24 @@ export default function MakingResume() {
       return;
     }
     navigate("/resume-making/preview");
+    localStorage.setItem(
+      "resume-data",
+      JSON.stringify({
+        avatar,
+        firstName,
+        lastName,
+        jobTitle,
+        address,
+        city,
+        country,
+        phone,
+        email,
+        summary,
+        skillSection,
+        educationSections,
+        experienceSection,
+      }),
+    );
   }
   return (
     <div className="font-poppins mt-[30px] flex flex-col items-center justify-center gap-[30px]">
@@ -248,7 +270,7 @@ export default function MakingResume() {
                 <label htmlFor="phone">Phone</label>
                 <input
                   required
-                  type="number"
+                  type="text"
                   id="phone"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
@@ -298,7 +320,7 @@ export default function MakingResume() {
         </div>
         <div className="mt-4 flex flex-col gap-[20px] px-4">
           <p className="text-[13px] text-gray-400">
-            Include a short summary about your professional experience{" "}
+            Include a short summary about your professional experience
           </p>
           <textarea
             className="w-full rounded border border-gray-300 p-2 text-[13px] placeholder:text-[14px] focus:border-blue-500 focus:outline-none"
@@ -344,6 +366,7 @@ export default function MakingResume() {
                 startDate: "",
                 endDate: "",
                 description: "",
+                isCompleted: false,
               },
             ]);
           }}
@@ -388,6 +411,7 @@ export default function MakingResume() {
                 startDate: "",
                 endDate: "",
                 description: "",
+                isCompleted: false,
               },
             ]);
           }}
