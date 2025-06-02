@@ -105,17 +105,11 @@ export default function ResumePDF({ resumeData }: { resumeData: ResumeData }) {
     <Document>
       <Page size="A4" style={styles.page}>
         <View style={styles.header}>
-          {resumeData.avatar && (
-            <Image
-              src={
-                resumeData.avatar &&
-                resumeData.avatar !== "/src/assets/upload-picture.png"
-                  ? resumeData.avatar
-                  : undefined
-              }
-              style={styles.avatar}
-            />
-          )}
+          {resumeData.avatar &&
+            resumeData.avatar !== "/src/assets/upload-picture.png" && (
+              <Image src={resumeData.avatar} style={styles.avatar} />
+            )}
+
           <Text style={styles.name}>
             {resumeData.firstName} {resumeData.lastName}
           </Text>

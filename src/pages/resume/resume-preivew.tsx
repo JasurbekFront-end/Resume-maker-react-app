@@ -1,11 +1,12 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MdBtn from "../../components/md-btn";
 import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
 import ResumePDF from "./resume-pdf";
-import type { EducationData, ExperienceData } from "../making-resume/making-resume";
-
-
+import type {
+  EducationData,
+  ExperienceData,
+} from "../making-resume/making-resume";
 
 export interface ResumeData {
   avatar: string;
@@ -48,7 +49,7 @@ export default function ResumePreview() {
   const navigate = useNavigate();
 
   const handleEdit = () => navigate("/resume-making");
-  // const handleDownload = async () => {
+
   //   if (!resumeRef.current) return;
 
   //   try {
