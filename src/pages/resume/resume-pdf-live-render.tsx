@@ -34,6 +34,11 @@ export default function ResumeHTMLLiveRender({
     );
     setIsAcceptableExperience(status);
   }, [resumeLiveData.experienceSection]);
+  const [isAcceptableSkills, setIsAcceptableSkills] = useState(false);
+  useEffect(() => {
+    const status = resumeLiveData.skillSection.some((item) => item !== "");
+    setIsAcceptableSkills(status);
+  }, [resumeLiveData.skillSection]);
   return (
     <div className="mx-auto h-auto w-full max-w-4xl bg-white p-4 font-sans text-sm text-[#1a1a1a] sm:p-6 md:p-8">
       {/* Header */}
@@ -96,28 +101,29 @@ export default function ResumeHTMLLiveRender({
         )}
 
       {/* Experience */}
-      {resumeLiveData.experienceSection?.length > 0  && isAcceptableExperience && (
-        <div className="mb-6 border-b border-gray-300 pb-2">
-          <h2 className="mb-2 text-sm font-bold tracking-wide text-[#333333] uppercase">
-            Experience
-          </h2>
-          {resumeLiveData.experienceSection.map((exp) => (
-            <div key={exp.id} className="mb-4">
-              <p className="font-bold text-[#222222]">{exp.role}</p>
-              <p className="text-[#666666]">{exp.company}</p>
-              <p className="text-xs text-[#888888] italic">
-                {exp.startDate} - {exp.isCompleted ? "Ongoing" : exp.endDate}
-              </p>
-              <p className="mt-2 leading-relaxed break-words text-[#333333]">
-                {exp.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      )}
+      {resumeLiveData.experienceSection?.length > 0 &&
+        isAcceptableExperience && (
+          <div className="mb-6 border-b border-gray-300 pb-2">
+            <h2 className="mb-2 text-sm font-bold tracking-wide text-[#333333] uppercase">
+              Experience
+            </h2>
+            {resumeLiveData.experienceSection.map((exp) => (
+              <div key={exp.id} className="mb-4">
+                <p className="font-bold text-[#222222]">{exp.role}</p>
+                <p className="text-[#666666]">{exp.company}</p>
+                <p className="text-xs text-[#888888] italic">
+                  {exp.startDate} - {exp.isCompleted ? "Ongoing" : exp.endDate}
+                </p>
+                <p className="mt-2 leading-relaxed break-words text-[#333333]">
+                  {exp.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        )}
 
       {/* Skills */}
-      {resumeLiveData.skillSection?.length > 0 && (
+      {resumeLiveData.skillSection?.length > 0 && isAcceptableSkills && (
         <div className="mb-6 border-b border-gray-300 pb-2">
           <h2 className="mb-2 text-sm font-bold tracking-wide text-[#333333] uppercase">
             Skills

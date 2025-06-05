@@ -133,6 +133,11 @@ export default function ResumePDF({ resumeData }: { resumeData: ResumeData }) {
       );
       setIsAcceptableExperience(status);
     }, [resumeData.experienceSection]);
+      const [isAcceptableSkills, setIsAcceptableSkills] = useState(false);
+  useEffect(() => {
+    const status = resumeData.skillSection.some((item) => item !== "");
+    setIsAcceptableSkills(status);
+  }, [resumeData.skillSection]);
   return (
     <Document>
       <Page size="A4" style={styles.page}>
@@ -198,7 +203,7 @@ export default function ResumePDF({ resumeData }: { resumeData: ResumeData }) {
         )}
 
 
-        {resumeData.skillSection?.length > 0 && (
+        {resumeData.skillSection?.length > 0 && isAcceptableSkills && (
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Skills</Text>
             <View style={styles.skillContainer}>
