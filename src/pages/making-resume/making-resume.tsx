@@ -37,7 +37,7 @@ export default function MakingResume() {
     const initialData = saved
       ? JSON.parse(saved)
       : {
-          avatar: null,
+          avatar: "",
           jobTitle: "",
           firstName: "",
           lastName: "",

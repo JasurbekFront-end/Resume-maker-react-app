@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MdBtn from "../../components/md-btn";
-import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 import ResumePDF from "./resume-pdf";
 import type {
   EducationData,
@@ -10,7 +10,7 @@ import type {
 import ResumeHTMLLiveRender from "./resume-pdf-live-render";
 
 export interface ResumeData {
-  avatar: string |boolean;
+  avatar: string;
   jobTitle: string;
   firstName: string;
   lastName: string;
