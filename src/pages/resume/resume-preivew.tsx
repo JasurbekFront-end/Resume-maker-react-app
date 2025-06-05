@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import MdBtn from "../../components/md-btn";
-import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 import ResumePDF from "./resume-pdf";
 import type {
   EducationData,
@@ -10,7 +10,7 @@ import type {
 import ResumeHTMLLiveRender from "./resume-pdf-live-render";
 
 export interface ResumeData {
-  avatar: string ;
+  avatar: string;
   jobTitle: string;
   firstName: string;
   lastName: string;
@@ -26,29 +26,30 @@ export interface ResumeData {
 }
 
 export default function ResumePreview() {
-  const [resumeData, setResumeData] = useState<ResumeData>(() => {
-    const saved = localStorage.getItem("resume-data");
-    return saved
-      ? JSON.parse(saved)
-      : {
-          avatar: "",
-          jobTitle: "",
-          firstName: "",
-          lastName: "",
-          email: "",
-          phone: "",
-          city: "",
-          country: "",
-          address: "",
-          summary: "",
-          educationSections: [],
-          experienceSection: [],
-          skillSection: [],
-        };
-  });
+  const saved = localStorage.getItem("resume-data");
+  const initialResumeData: ResumeData = saved
+    ? JSON.parse(saved)
+    : {
+        avatar: "",
+        jobTitle: "",
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        city: "",
+        country: "",
+        address: "",
+        summary: "",
+        educationSections: [],
+        experienceSection: [],
+        skillSection: [],
+      };
+
+  const resumeDataRef = useRef<ResumeData>(initialResumeData);
+
   useEffect(() => {
-    localStorage.setItem("resume-data", JSON.stringify(resumeData));
-  }, [resumeData]);
+    localStorage.setItem("resume-data", JSON.stringify(resumeDataRef.current));
+  }, [resumeDataRef]);
   const navigate = useNavigate();
 
   const handleEdit = () => navigate("/resume-making");
@@ -58,8 +59,8 @@ export default function ResumePreview() {
       <div className="mb-8 flex w-full max-w-[210mm] justify-between">
         <MdBtn onClick={handleEdit} value={"Edit"} />
         <PDFDownloadLink
-          document={<ResumePDF resumeData={resumeData} />}
-          fileName={`${resumeData.firstName}_${resumeData.lastName}_CV.pdf`}
+          document={<ResumePDF resumeData={initialResumeData} />}
+          fileName={`${initialResumeData.firstName}_${initialResumeData.lastName}_CV.pdf`}
           onClick={() => {
             try {
               const existing = localStorage.getItem("user-resumes");
@@ -68,7 +69,7 @@ export default function ResumePreview() {
                 resumes = JSON.parse(existing);
               }
               resumes.push({
-                ...resumeData,
+                ...initialResumeData,
                 createdAt: new Date().toISOString(),
               });
               localStorage.setItem("user-resumes", JSON.stringify(resumes));
@@ -83,8 +84,8 @@ export default function ResumePreview() {
         </PDFDownloadLink>
       </div>
 
-      <div className="h-auto w-full lg:w-[50%] ">
-        <ResumeHTMLLiveRender resumeLiveData={resumeData}/>
+      <div className="h-auto w-full lg:w-[50%]">
+        <ResumeHTMLLiveRender resumeLiveData={initialResumeData} />
       </div>
     </div>
   );

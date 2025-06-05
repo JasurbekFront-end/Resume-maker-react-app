@@ -86,7 +86,7 @@ export default function MakingResume() {
   const [showAlert, setShowAlert] = useState(false);
   const [alertText, setAlertText] = useState("");
 
-  const handleChange = (field: keyof ResumeData, value: any) => {
+  const handleChange = (field: keyof ResumeData, value:any) => {
     setLiveResumeData((prev) => ({
       ...prev,
       [field]: value,
