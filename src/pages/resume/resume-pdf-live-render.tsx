@@ -41,7 +41,6 @@ export default function ResumeHTMLLiveRender({
   }, [resumeLiveData.skillSection]);
   return (
     <div className="mx-auto h-auto w-full max-w-4xl bg-white p-4 font-sans text-sm text-[#1a1a1a] sm:p-6 md:p-8">
-      {/* Header */}
       <div className="mb-8 text-center">
         {resumeLiveData.avatar && (
           <img
@@ -56,7 +55,6 @@ export default function ResumeHTMLLiveRender({
         <p className="mt-1 text-sm text-[#555555]">{resumeLiveData.jobTitle}</p>
       </div>
 
-      {/* Contact */}
       <div className="mb-8 text-center text-xs leading-relaxed text-[#444444] sm:text-sm">
         {resumeLiveData.email && <p>{resumeLiveData.email}</p>}
         {resumeLiveData.phone && <p>{resumeLiveData.phone}</p>}
@@ -68,7 +66,6 @@ export default function ResumeHTMLLiveRender({
         {resumeLiveData.address && <p>{resumeLiveData.address}</p>}
       </div>
 
-      {/* Summary */}
       {resumeLiveData.summary && (
         <div className="mb-6 border-b border-gray-300 pb-2 break-words">
           <h2 className="mb-2 text-sm font-bold tracking-wide text-[#333333] uppercase">
@@ -78,7 +75,6 @@ export default function ResumeHTMLLiveRender({
         </div>
       )}
 
-      {/* Education */}
       {resumeLiveData.educationSections?.length > 0 &&
         isAcceptableEducation && (
           <div className="mb-6 border-b border-gray-300 pb-2">
@@ -100,7 +96,6 @@ export default function ResumeHTMLLiveRender({
           </div>
         )}
 
-      {/* Experience */}
       {resumeLiveData.experienceSection?.length > 0 &&
         isAcceptableExperience && (
           <div className="mb-6 border-b border-gray-300 pb-2">
@@ -122,7 +117,6 @@ export default function ResumeHTMLLiveRender({
           </div>
         )}
 
-      {/* Skills */}
       {resumeLiveData.skillSection?.length > 0 && isAcceptableSkills && (
         <div className="mb-6 border-b border-gray-300 pb-2">
           <h2 className="mb-2 text-sm font-bold tracking-wide text-[#333333] uppercase">

@@ -1,13 +1,5 @@
 import { useState } from "react";
-interface EducationData {
-  id: number;
-  school: string;
-  field: string;
-  startDate: string;
-  endDate: string;
-  description: string;
-  isCompleted: boolean;
-}
+import type { EducationData } from "./making-resume";
 interface EducationProps {
   data: EducationData;
   onDelete: () => void;

@@ -9,7 +9,6 @@ import {
 import type { ResumeData } from "./resume-preivew";
 import { useEffect, useState } from "react";
 
-// Stil yaratish
 const styles = StyleSheet.create({
   page: {
     display: "flex",

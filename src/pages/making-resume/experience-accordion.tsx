@@ -1,17 +1,10 @@
 import { useState } from "react";
+import type { ExperienceData } from "./making-resume";
 
 interface ExperienceAccordionProps {
   onDelete: () => void;
   data: ExperienceData;
   onChange: (field: keyof ExperienceData, value: string | boolean) => void;
-}
-interface ExperienceData {
-  company: string;
-  role: string;
-  startDate: string;
-  endDate: string;
-  description: string;
-  isCompleted: boolean;
 }
 export default function ExperienceAccordion({
   data,
