@@ -7,9 +7,13 @@ import {
   StyleSheet,
 } from "@react-pdf/renderer";
 import type { ResumeData } from "./resume-preivew";
+import { useEffect, useState } from "react";
 
+// Stil yaratish
 const styles = StyleSheet.create({
   page: {
+    display: "flex",
+    flexDirection: "column",
     padding: 30,
     fontSize: 11,
     backgroundColor: "#ffffff",
@@ -87,8 +91,8 @@ const styles = StyleSheet.create({
   },
   skillItem: {
     fontSize: 10,
-    paddingVertical: 2,
-    paddingHorizontal: 6,
+    paddingVertical: 4,
+    paddingHorizontal: 10,
     backgroundColor: "#f2f2f2",
     color: "#222222",
     margin: 3,
@@ -101,14 +105,42 @@ const styles = StyleSheet.create({
 });
 
 export default function ResumePDF({ resumeData }: { resumeData: ResumeData }) {
+    const [isAcceptableEducation, setIsAcceptableEducation] = useState(false);
+  
+    useEffect(() => {
+      const status = resumeData.educationSections.some(
+        (item) =>
+          item.school ||
+          item.field ||
+          item.startDate ||
+          item.endDate ||
+          item.description ||
+          item.isCompleted,
+      );
+      setIsAcceptableEducation(status);
+    }, [resumeData.educationSections]);
+    const [isAcceptableExperience, setIsAcceptableExperience] = useState(false);
+  
+    useEffect(() => {
+      const status = resumeData.experienceSection.some(
+        (item) =>
+          item.company ||
+          item.role ||
+          item.startDate ||
+          item.endDate ||
+          item.description ||
+          item.isCompleted,
+      );
+      setIsAcceptableExperience(status);
+    }, [resumeData.experienceSection]);
   return (
     <Document>
       <Page size="A4" style={styles.page}>
         <View style={styles.header}>
-          {resumeData.avatar &&
-            resumeData.avatar !== "/src/assets/upload-picture.png" && (
-              <Image src={resumeData.avatar} style={styles.avatar} />
-            )}
+          <Image
+            src={resumeData.avatar ? resumeData.avatar : ""}
+            style={resumeData.avatar ? styles.avatar : { width: 0, height: 0 }}
+          />
 
           <Text style={styles.name}>
             {resumeData.firstName} {resumeData.lastName}
@@ -117,14 +149,14 @@ export default function ResumePDF({ resumeData }: { resumeData: ResumeData }) {
         </View>
 
         <View style={styles.contact}>
-          {resumeData.email && <Text> {resumeData.email}</Text>}
-          {resumeData.phone && <Text> {resumeData.phone}</Text>}
+          {resumeData.email && <Text>{resumeData.email}</Text>}
+          {resumeData.phone && <Text>{resumeData.phone}</Text>}
           {(resumeData.city || resumeData.country) && (
             <Text>
               {resumeData.city}, {resumeData.country}
             </Text>
           )}
-          {resumeData.address && <Text> {resumeData.address}</Text>}
+          {resumeData.address && <Text>{resumeData.address}</Text>}
         </View>
 
         {resumeData.summary && (
@@ -133,25 +165,7 @@ export default function ResumePDF({ resumeData }: { resumeData: ResumeData }) {
             <Text>{resumeData.summary}</Text>
           </View>
         )}
-
-        {resumeData.experienceSection?.length > 0 && (
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Experience</Text>
-            {resumeData.experienceSection.map((exp) => (
-              <View key={exp.id} style={styles.experienceItem}>
-                <Text style={styles.role}>{exp.role}</Text>
-                <Text style={styles.company}>{exp.company}</Text>
-                <Text style={styles.date}>
-                  {exp.startDate} -{" "}
-                  {exp.isCompleted ? "Ongoing" : exp.endDate || "N/A"}
-                </Text>
-                <Text style={styles.description}>{exp.description}</Text>
-              </View>
-            ))}
-          </View>
-        )}
-
-        {resumeData.educationSections?.length > 0 && (
+        {resumeData.educationSections?.length > 0 && isAcceptableEducation && (
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Education</Text>
             {resumeData.educationSections.map((edu) => (
@@ -159,14 +173,30 @@ export default function ResumePDF({ resumeData }: { resumeData: ResumeData }) {
                 <Text style={styles.role}>{edu.field}</Text>
                 <Text style={styles.company}>{edu.school}</Text>
                 <Text style={styles.date}>
-                  {edu.startDate} -{" "}
-                  {edu.isCompleted ? "Ongoing" : edu.endDate || "N/A"}
+                  {edu.startDate} - {edu.isCompleted ? "Ongoing" : edu.endDate}
                 </Text>
                 <Text style={styles.description}>{edu.description}</Text>
               </View>
             ))}
           </View>
         )}
+
+        {resumeData.experienceSection?.length > 0 && isAcceptableExperience && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Experience</Text>
+            {resumeData.experienceSection.map((exp) => (
+              <View key={exp.id} style={styles.experienceItem}>
+                <Text style={styles.role}>{exp.role}</Text>
+                <Text style={styles.company}>{exp.company}</Text>
+                <Text style={styles.date}>
+                  {exp.startDate} - {exp.isCompleted ? "Ongoing" : exp.endDate}
+                </Text>
+                <Text style={styles.description}>{exp.description}</Text>
+              </View>
+            ))}
+          </View>
+        )}
+
 
         {resumeData.skillSection?.length > 0 && (
           <View style={styles.section}>

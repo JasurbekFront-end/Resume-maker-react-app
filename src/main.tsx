@@ -7,6 +7,7 @@ import "./index.css";
 import Layout from "./layouts/layout";
 import ScrollTo from "./scrollto";
 import ResumePreview from "./pages/resume/resume-preivew";
+import UserProfile from "./pages/user/user-profile";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -18,6 +19,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           <Route path="home" element={<Home />} />
           <Route path="resume-making" element={<MakingResume />} />
           <Route path="/resume-making/preview" element={<ResumePreview />} />
+          <Route path="/user-profile" element={<UserProfile />} />
         </Route>
       </Routes>
     </BrowserRouter>

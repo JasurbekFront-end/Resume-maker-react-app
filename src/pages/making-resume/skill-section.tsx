@@ -21,7 +21,7 @@ export default function SkillSection({onDelete,onChange,value}:SkillsectionProps
           )}
         </span>
         <span
-          className="absolute right-4 text-gray-500"
+          className="absolute right-4 text-gray-500 text-[20px]"
           onClick={(e) => {
             e.stopPropagation();
             onDelete()

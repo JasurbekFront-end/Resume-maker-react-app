@@ -1,11 +1,15 @@
 type MdBtnProps = {
   value: string;
-  onClick ?:()=>void
+  onClick?: () => void;
+  className?: string;
 };
 
-export default function MdBtn({value,onClick}:MdBtnProps) {
+export default function MdBtn({ value, onClick, className }: MdBtnProps) {
   return (
-    <button onClick={onClick} className="font-poppins rounded-md bg-blue-500 px-4 py-2 text-white">
+    <button
+      onClick={onClick}
+      className={`font-poppins rounded-md px-4 py-2 text-white ${className ? className : "bg-blue-500"} font-poppins lg:cursor-pointer lg:px-6 lg:py-3`}
+    >
       {value}
     </button>
   );

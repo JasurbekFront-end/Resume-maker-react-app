@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 interface HiddenMenuMobileProps {
   toggleMenu: () => void;
@@ -8,6 +8,10 @@ export default function HiddenMenuMobile({
   toggleMenu,
   isMenuOpen,
 }: HiddenMenuMobileProps) {
+  const navigate = useNavigate();
+  function handleUserClick() {
+    navigate("/user-profile");
+  }
   return (
     <div
       className={`absolute top-0 left-0 z-20 flex h-screen w-full overflow-hidden transition-all duration-300 ease-in-out ${
@@ -25,7 +29,13 @@ export default function HiddenMenuMobile({
       >
         <div className="h-[81px] w-full border-b border-gray-300">
           <div className="flex h-full w-full items-center justify-between px-3">
-            <div className="flex items-center gap-[15px]">
+            <div
+              className="flex items-center gap-[15px]"
+              onClick={() => {
+                handleUserClick();
+                toggleMenu();
+              }}
+            >
               <div className="bg-custom-avatar-image flex size-[50px] items-center justify-center rounded-full" />
               <h1 className="text-[18px] font-[600] text-gray-700">John Doe</h1>
             </div>

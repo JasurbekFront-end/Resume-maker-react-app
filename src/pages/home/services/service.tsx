@@ -4,7 +4,7 @@ interface ServiceData {
 }
 export default function Service({ svgLink, text }: ServiceData) {
   return (
-    <div className="font-poppins flex w-[70%] flex-col items-center justify-center rounded-xl bg-[#C9E9FF33] p-4">
+    <div className="font-poppins flex w-[70%] flex-col items-center justify-center rounded-xl bg-[#C9E9FF33] p-4 transition duration-300 lg:cursor-pointer lg:hover:scale-95">
       <div className="flex w-full items-center justify-center">
         <img src={svgLink} className="w-[70%]" />
       </div>
