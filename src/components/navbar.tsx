@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-
+import logo from '../assets/logo.png';
 interface HiddenMenuMobileProps {
   toggleMenu: () => void;
 }
@@ -16,7 +16,7 @@ export default function Navbar({ toggleMenu }: HiddenMenuMobileProps) {
           className="flex items-end justify-center gap-[15px] lg:cursor-pointer"
           onClick={()=>{handleNavigate("home")}}
         >
-          <img src="/src/assets/logo.png" alt="" />
+          <img src={logo} alt="" />
           <h3 className="font-poppins -mb-[5px] font-[700] text-blue-500">
             Resume Making
           </h3>
