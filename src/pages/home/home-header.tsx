@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/button";
+import learningBro from "../../assets/learning-bro.svg"
 
 export default function HomeHeader() {
   const navigate = useNavigate();
@@ -9,7 +10,7 @@ export default function HomeHeader() {
   return (
     <div className="flex w-full flex-col items-center justify-center py-2 lg:flex-row lg:bg-gradient-to-r lg:from-blue-500 lg:to-blue-300 lg:px-[140px]">
       <div className="flex w-full items-center justify-center lg:w-[50%]">
-        <img src="/src/assets/learning-bro.svg" className="w-[90%]" alt="" />
+        <img src={learningBro} className="w-[90%]" alt="" />
       </div>
       <div className="font-poppins flex w-full flex-col items-center justify-center bg-blue-400 px-5 py-5 lg:w-[50%] lg:bg-transparent">
         <h1 className="text-center text-[30px] font-[700] text-[#0f172a] lg:text-[38px]">
