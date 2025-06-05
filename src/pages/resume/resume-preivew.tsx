@@ -10,7 +10,7 @@ import type {
 import ResumeHTMLLiveRender from "./resume-pdf-live-render";
 
 export interface ResumeData {
-  avatar: string |boolean;
+  avatar: string ;
   jobTitle: string;
   firstName: string;
   lastName: string;
