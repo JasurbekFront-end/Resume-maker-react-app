@@ -7,7 +7,7 @@ export default function ResumeHTMLLiveRender({
   resumeLiveData: ResumeData;
 }) {
   const [isAcceptableEducation, setIsAcceptableEducation] = useState(false);
-
+  console.log(resumeLiveData);
   useEffect(() => {
     const status = resumeLiveData.educationSections.some(
       (item) =>
@@ -123,14 +123,16 @@ export default function ResumeHTMLLiveRender({
             Skills
           </h2>
           <div className="flex flex-wrap">
-            {resumeLiveData.skillSection.map((skill, idx) => (
-              <span
-                key={idx}
-                className="m-1 rounded bg-gray-100 px-3 py-1 text-xs text-[#222222]"
-              >
-                {skill}
-              </span>
-            ))}
+            {resumeLiveData.skillSection.map((skill, idx) =>
+              skill ? (
+                <span
+                  key={idx}
+                  className="m-1 rounded bg-gray-100 px-3 py-1 text-xs text-[#222222]"
+                >
+                  {skill}
+                </span>
+              ) : null,
+            )}
           </div>
         </div>
       )}
