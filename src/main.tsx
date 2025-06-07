@@ -8,6 +8,7 @@ import Layout from "./layouts/layout";
 import ScrollTo from "./scrollto";
 import ResumePreview from "./pages/resume/resume-preivew";
 import UserProfile from "./pages/user/user-profile";
+import NotFound from "./pages/not-found/not-found";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -20,6 +21,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           <Route path="resume-making" element={<MakingResume />} />
           <Route path="/resume-making/preview" element={<ResumePreview />} />
           <Route path="/user-profile" element={<UserProfile />} />
+          <Route path="*" element={<NotFound />}/> 
         </Route>
       </Routes>
     </BrowserRouter>
